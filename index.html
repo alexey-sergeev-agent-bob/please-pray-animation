@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Please pay to please pray animation</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at top, #1e293b 0, var(--bg) 55%);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .stage {
+      width: min(92vw, 980px);
+      padding: 72px 48px;
+      border-radius: 32px;
+      background: rgba(15, 23, 42, 0.72);
+      box-shadow: 0 32px 100px rgba(0, 0, 0, 0.42);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .caption {
+      margin-bottom: 28px;
+      color: var(--muted);
+      font-size: clamp(14px, 1.6vw, 18px);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .phrase {
+      display: inline-flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 0.28em;
+      font-size: clamp(44px, 9vw, 118px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.06em;
+      white-space: nowrap;
+    }
+
+    .word {
+      display: inline-flex;
+      position: relative;
+      align-items: baseline;
+    }
+
+    .letter {
+      display: inline-block;
+    }
+
+    .inserted-r {
+      display: inline-block;
+      color: var(--accent);
+      width: 0;
+      opacity: 0;
+      transform: translateX(-0.35em) translateY(-0.9em) rotate(-14deg) scale(0.55);
+      animation: revealR 4.2s cubic-bezier(.2,.9,.25,1) infinite;
+    }
+
+    .pay-word {
+      animation: wordShift 4.2s cubic-bezier(.2,.9,.25,1) infinite;
+    }
+
+    .ellipsis {
+      display: inline-flex;
+      gap: 0.08em;
+      margin-left: 0.08em;
+    }
+
+    .dot {
+      animation: dotPulse 4.2s ease-in-out infinite;
+    }
+
+    .dot:nth-child(2) {
+      animation-delay: 0.12s;
+    }
+
+    .dot:nth-child(3) {
+      animation-delay: 0.24s;
+    }
+
+    .hint {
+      margin-top: 34px;
+      color: var(--muted);
+      font-size: clamp(15px, 2vw, 22px);
+      letter-spacing: -0.01em;
+      opacity: 0;
+      transform: translateY(8px);
+      animation: hintFade 4.2s ease-in-out infinite;
+    }
+
+    @keyframes revealR {
+      0%, 30% {
+        width: 0;
+        opacity: 0;
+        transform: translateX(-0.35em) translateY(-0.9em) rotate(-14deg) scale(0.55);
+      }
+      43%, 72% {
+        width: 0.48em;
+        opacity: 1;
+        transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+      }
+      100% {
+        width: 0;
+        opacity: 0;
+        transform: translateX(-0.35em) translateY(-0.9em) rotate(-14deg) scale(0.55);
+      }
+    }
+
+    @keyframes wordShift {
+      0%, 30% {
+        filter: drop-shadow(0 0 0 rgba(56, 189, 248, 0));
+      }
+      43%, 72% {
+        filter: drop-shadow(0 0 28px rgba(56, 189, 248, 0.35));
+      }
+      100% {
+        filter: drop-shadow(0 0 0 rgba(56, 189, 248, 0));
+      }
+    }
+
+    @keyframes dotPulse {
+      0%, 18%, 100% {
+        opacity: 0.35;
+        transform: translateY(0);
+      }
+      30%, 62% {
+        opacity: 1;
+        transform: translateY(-0.06em);
+      }
+    }
+
+    @keyframes hintFade {
+      0%, 34%, 88%, 100% {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      48%, 72% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="stage" aria-label="Animation changing please pay into please pray">
+    <div class="caption">one letter changes the meaning</div>
+
+    <div class="phrase">
+      <span>please</span>
+      <span class="word pay-word">
+        <span class="letter">p</span>
+        <span class="inserted-r">r</span>
+        <span class="letter">a</span>
+        <span class="letter">y</span>
+      </span>
+      <span class="ellipsis" aria-hidden="true">
+        <span class="dot">.</span>
+        <span class="dot">.</span>
+        <span class="dot">.</span>
+      </span>
+    </div>
+
+    <div class="hint">please pay → please pray</div>
+  </main>
+</body>
+</html>
